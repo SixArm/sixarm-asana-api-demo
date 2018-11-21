@@ -15,11 +15,13 @@
 #
 # ## Introduction
 #
-# Developers: see https://asana.com/developers
+# Asana technical info:
 #
-# API: https://asana.com/guide/help/api/api
+#   * API: https://asana.com/guide/help/api/api
 #
-# Clients: https://asana.com/developers/documentation/getting-started/client-libraries
+#   * Developers: see https://asana.com/developers
+#
+#   * Clients: https://asana.com/developers/documentation/getting-started/client-libraries
 #
 #
 # ## Setup
