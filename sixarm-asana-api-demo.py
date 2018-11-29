@@ -95,13 +95,6 @@ def show_workspaces_and_projects_and_tasks():
            for task in ASANA_CLIENT.tasks.find_by_project(project['id']):
                print(f"task name: {task['name']}")
 
-def show_tags():
-    print("Show each workspace and its tags")
-    for workspace in ASANA_CLIENT.workspaces.find_all():
-       print(f"workspace name:{workspace['name']}")
-       for tag in ASANA_CLIENT.tags.find_all({'workspace': workspace['id']}):
-            print(f"tag name:{tag['name']}")
-        
 def create_task():
     print("Create a task in the first workspace and first project.")
     
@@ -122,11 +115,36 @@ def create_task():
         })
     pprint(result)
     
-    task_id = ta['id']
+    task_id = task['id']
     print(f"task id:{task_id}")
 
     task = ASANA_CLIENT.tasks.find_by_id(task_id)
     pprint(task)
+
+###
+# 
+# Tags
+#
+##
+
+def show_tags():
+    print("Show each workspace and its tags")
+    for workspace in ASANA_CLIENT.workspaces.find_all():
+       print(f"workspace name:{workspace['name']}")
+       for tag in ASANA_CLIENT.tags.find_all({'workspace': workspace['id']}):
+            print(f"tag name:{tag['name']}")
+        
+def create_tag():
+    print("Create a tag in the first workspace...")
+    workspace = list(ASANA_CLIENT.workspaces.find_all())[0]
+    tag = ASANA_CLIENT.tags.create({
+        'name': "Demo tag",
+        'workspace': workspace['id'],
+        'color': 'dark-red'
+    })
+
+    tag_id = tag['id']
+    print(f"tag id:{tag_id}")
 
 ASANA_CLIENT = asana_client()
 
@@ -134,10 +152,11 @@ def main():
     print("Asana API demo")
     #show_me()
     #show_workspaces()
-    show_workspaces_and_projects()
+    #show_workspaces_and_projects()
     #show_workspaces_and_projects_and_tasks()    
-    show_tags()
     #create_task()
-  
+    #show_tags()
+    create_tag()
+    
 if __name__== "__main__":
     main()
