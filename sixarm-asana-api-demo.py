@@ -65,6 +65,24 @@ def asana_client():
 
 ##
 #
+# Defaults
+#
+##
+
+def workspace_default():
+    return list(ASANA_CLIENT.workspaces.find_all())[0]
+
+def project_default():
+    return list(ASANA_CLIENT.projects.find_by_workspace(workspace_default()['id']))[0]
+
+def task_default():
+    return list(ASANA_CLIENT.tasks.find_by_project(project_default()['id']))[0]
+
+def tag_default():
+    return list(ASANA_CLIENT.tags.find_all({'workspace': workspace_default()['id']}))[0]
+
+##
+#
 # Print your personal info, workspaces, projects, and tasks.
 #
 ##
@@ -167,10 +185,10 @@ def main():
     #show_workspaces()
     #show_workspaces_and_projects()
     #show_workspaces_and_projects_and_tasks()    
-    show_task()
+    #show_task()
     #create_task()
     #show_tags()
-    create_tag()
+    #create_tag()
     
 if __name__== "__main__":
     main()
