@@ -95,8 +95,21 @@ def show_workspaces_and_projects_and_tasks():
            for task in ASANA_CLIENT.tasks.find_by_project(project['id']):
                print(f"task name: {task['name']}")
 
+##
+#
+# Tasks
+#
+##
+
+def show_task():
+    print("Show the first task in the first project in the first workspace.")
+    workspace = list(ASANA_CLIENT.workspaces.find_all())[0]
+    project = list(ASANA_CLIENT.projects.find_by_workspace(workspace['id']))[0]
+    task = list(ASANA_CLIENT.tasks.find_by_project(project['id']))[0]
+    pprint(task)
+
 def create_task():
-    print("Create a task in the first workspace and first project.")
+    print("Create a task in the first project in the first workspace.")
     
     workspace = list(ASANA_CLIENT.workspaces.find_all())[0]
     print(f"workspace:{workspace['name']}")
@@ -154,6 +167,7 @@ def main():
     #show_workspaces()
     #show_workspaces_and_projects()
     #show_workspaces_and_projects_and_tasks()    
+    show_task()
     #create_task()
     #show_tags()
     create_tag()
